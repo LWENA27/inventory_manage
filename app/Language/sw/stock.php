@@ -1,0 +1,23 @@
+<?php
+return [
+    'stockHistory' => 'Historia ya Stoo',
+    'warehouseInventory' => 'Stoo ya Ghala',
+    'inventory' => 'Stoo',
+    'addProduct' => 'Ongeza Bidhaa',
+    'back' => 'Rudi',
+    'selectWarehouse' => 'Chagua Ghala',
+    'filter' => 'Chuja',
+    'product' => 'Bidhaa',
+    'allProducts' => 'Bidhaa Zote',
+    'export' => 'Hamisha',
+    'batch' => 'Kifurushi',
+    'expiry' => 'Mwisho wa Matumizi',
+    'quantity' => 'Kiasi',
+    'operation' => 'Aina ya Mabadiliko',
+    'reason' => 'Sababu',
+    'date' => 'Tarehe',
+    'lowStockAlert' => 'Arifa ya Stoo Kidogo',
+    'stockIn' => 'Stoo Imeingia',
+    'stockOut' => 'Stoo Imetoka',
+    'adjustment' => 'Marekebisho',
+];

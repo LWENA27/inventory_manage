@@ -1,0 +1,23 @@
+<?php
+return [
+    'stockHistory' => 'Stock History',
+    'warehouseInventory' => 'Warehouse Inventory',
+    'inventory' => 'Inventory',
+    'addProduct' => 'Add Product',
+    'back' => 'Back',
+    'selectWarehouse' => 'Select Warehouse',
+    'filter' => 'Filter',
+    'product' => 'Product',
+    'allProducts' => 'All Products',
+    'export' => 'Export',
+    'batch' => 'Batch',
+    'expiry' => 'Expiry',
+    'quantity' => 'Quantity',
+    'operation' => 'Operation',
+    'reason' => 'Reason',
+    'date' => 'Date',
+    'lowStockAlert' => 'Low Stock Alert',
+    'stockIn' => 'Stock In',
+    'stockOut' => 'Stock Out',
+    'adjustment' => 'Adjustment',
+];
