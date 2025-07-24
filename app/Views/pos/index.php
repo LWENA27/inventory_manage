@@ -140,9 +140,31 @@ document.getElementById('addToCartForm').addEventListener('submit', function(e) 
 document.getElementById('checkoutForm').addEventListener('submit', function(e) {
     e.preventDefault();
     if (cart.length === 0) return alert('Cart is empty!');
-    alert('Sale completed! (Demo only)');
-    cart = [];
-    updateCartTable();
+    const customer_name = document.getElementById('customer_name').value;
+    const payment_method = document.getElementById('payment_method').value;
+    fetch('<?= site_url('pos/checkout') ?>', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
+        },
+        body: JSON.stringify({
+            cart: cart,
+            customer_name: customer_name,
+            payment_method: payment_method
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.status === 'success') {
+            alert('Sale completed!');
+            cart = [];
+            updateCartTable();
+        } else {
+            alert(data.message || 'Sale failed!');
+        }
+    })
+    .catch(() => alert('Sale failed!'));
 });
 </script>
 <?= $this->endSection() ?>

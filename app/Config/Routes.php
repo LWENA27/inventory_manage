@@ -26,6 +26,8 @@ $routes->group('', ['filter' => 'authGuard'], function($routes) {
 
     // Dashboard & Trial
     $routes->GET('dashboard', 'Dashboard::index');
+    // Profile
+    $routes->GET('profile', 'Profile::index');
     $routes->GET('trial-status', 'Trial::status');
 
     // Products
@@ -76,6 +78,6 @@ $routes->group('', ['filter' => 'authGuard'], function($routes) {
     // POS
     $routes->GET('pos', 'Pos::index');
     $routes->POST('pos/add', 'Pos::add');
-    $routes->POST('pos/checkout', 'Pos::checkout');
+    $routes->post('pos/checkout', 'Pos::checkout');
 
 });

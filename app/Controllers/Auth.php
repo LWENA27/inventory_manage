@@ -65,14 +65,15 @@ class Auth extends Controller
                     'id'        => $user['id'],
                     'name'      => $user['name'],
                     'role'      => $user['role'],
-                    'email'     => $user['email']
+                    'email'     => $user['email'],
+                    'tenant_id' => $user['tenant_id'] ?? 1
                 ];
-                
                 // Set both individual session keys and the 'user' key for AuthGuard
                 $this->session->set([
                     'user_id'    => $user['id'],
                     'name'       => $user['name'],
                     'role'       => $user['role'],
+                    'tenant_id'  => $user['tenant_id'] ?? 1,
                     'isLoggedIn' => true,
                     'user'       => $userData  // This is what AuthGuard checks for
                 ]);
