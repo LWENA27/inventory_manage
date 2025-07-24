@@ -57,6 +57,7 @@ $routes->group('', ['filter' => 'authGuard'], function($routes) {
 
     // Transfers
     $routes->GET('transfers', 'Transfers::index');
+    $routes->GET('transfers/create', 'Transfers::create');
 
     // Reports
     $routes->GET('reports', 'Reports::index');
