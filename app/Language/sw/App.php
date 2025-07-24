@@ -225,4 +225,14 @@ return [
     'billingAddress' => 'Anwani ya Malipo',
     'shippingMethod' => 'Njia ya Usafirishaji',
     'trackingNumber' => 'Namba ya Ufuatiliaji',
+
+    // Dashboard & Guidance
+    'noRecords' => 'Hakuna rekodi zilizopatikana kwa sasa.',
+    'gettingStarted' => 'Kuanza',
+    'addProducts' => 'Ongeza Bidhaa',
+    'addProductsDesc' => 'Anza kwa kuongeza bidhaa zako kwenye hifadhi.',
+    'makeSale' => 'Fanya Mauzo',
+    'makeSaleDesc' => 'Tumia mfumo wa POS kurekodi mauzo na kutoa risiti.',
+    'setupSystem' => 'Sanidi Mfumo',
+    'setupSystemDesc' => 'Sanidi biashara yako, watumiaji, na mapendeleo.',
 ];

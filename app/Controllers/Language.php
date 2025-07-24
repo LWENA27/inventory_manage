@@ -19,11 +19,11 @@ class Language extends Controller
         if (!in_array($locale, $validLocales)) {
             $locale = 'en'; // Default to English if invalid
         }
-        
+
         // Set the locale in the session
         session()->set('locale', $locale);
-        
-        // Redirect back to the previous page
-        return redirect()->back();
+
+        // Redirect to dashboard to force reload with new language
+        return redirect()->to('dashboard');
     }
 }
