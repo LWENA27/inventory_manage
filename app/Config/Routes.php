@@ -24,10 +24,11 @@ $routes->GET('language/(:segment)', 'Language::setLanguage/$1');
 // Protected Routes (requires user to be logged in)
 $routes->group('', ['filter' => 'authGuard'], function($routes) {
 
+    // Dashboard & Trial
     $routes->GET('dashboard', 'Dashboard::index');
     $routes->GET('trial-status', 'Trial::status');
 
-    // Products Routes
+    // Products
     $routes->GET('products', 'Products::index');
     $routes->GET('products/create', 'Products::create');
     $routes->POST('products', 'Products::store');
@@ -38,8 +39,8 @@ $routes->group('', ['filter' => 'authGuard'], function($routes) {
     $routes->GET('products/search', 'Products::search');
     $routes->GET('products/category', 'Products::filterByCategory');
     $routes->GET('products/low-stock', 'Products::lowStock');
-    
-    // Inventory Routes
+
+    // Inventory
     $routes->GET('inventory', 'Inventory::index');
     $routes->GET('inventory/adjust/(:num)', 'Inventory::adjust/$1');
     $routes->POST('inventory/adjust/(:num)', 'Inventory::processAdjustment/$1');
@@ -50,12 +51,30 @@ $routes->group('', ['filter' => 'authGuard'], function($routes) {
     $routes->GET('inventory/warehouse/(:num)', 'Inventory::byWarehouse/$1');
     $routes->GET('inventory/batches', 'Inventory::batches');
 
-    // Settings Routes
+    // Invoices & Purchases
+    $routes->GET('invoices', 'Invoices::index');
+    $routes->GET('purchases', 'Purchases::index');
+
+    // Transfers
+    $routes->GET('transfers', 'Transfers::index');
+
+    // Reports
+    $routes->GET('reports', 'Reports::index');
+    $routes->GET('reports/sales', 'Reports::sales');
+    $routes->GET('reports/purchases', 'Reports::purchases');
+    $routes->GET('reports/inventory', 'Reports::inventory');
+    $routes->GET('reports/profit', 'Reports::profit');
+    $routes->GET('reports/taxes', 'Reports::taxes');
+    $routes->GET('reports/customers', 'Reports::customers');
+    $routes->GET('reports/suppliers', 'Reports::suppliers');
+
+    // Settings
     $routes->GET('settings', 'Settings::index');
     $routes->POST('settings/update', 'Settings::update');
 
-    // POS Routes
+    // POS
     $routes->GET('pos', 'Pos::index');
     $routes->POST('pos/add', 'Pos::add');
     $routes->POST('pos/checkout', 'Pos::checkout');
+
 });
