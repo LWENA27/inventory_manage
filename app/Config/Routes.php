@@ -82,6 +82,10 @@ $routes->group('', ['filter' => 'authGuard'], function($routes) {
     // Settings
     $routes->GET('settings', 'Settings::index');
     $routes->POST('settings/update', 'Settings::update');
+    $routes->GET('settings/manage_category', 'Settings::manageCategory');
+    $routes->POST('settings/category/add', 'Settings::addCategory');
+    $routes->GET('settings/category/edit/(:num)', 'Settings::editCategory/$1');
+    $routes->GET('settings/category/delete/(:num)', 'Settings::deleteCategory/$1');
 
     // POS
     $routes->GET('pos', 'Pos::index');

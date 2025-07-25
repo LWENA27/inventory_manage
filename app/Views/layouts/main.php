@@ -85,10 +85,60 @@
 
     <div class="container-fluid">
         <div class="row">
-            <!-- Sidebar -->
-            <div class="col-md-3 col-lg-2 d-md-block sidebar collapse" id="sidebarMenu">
+            <!-- Sidebar (desktop) -->
+            <div class="col-md-3 col-lg-2 d-none d-md-block sidebar collapse show" id="sidebarMenu">
                 <div class="position-sticky pt-3">
                     <ul class="nav flex-column">
+            <!-- Sidebar Drawer (mobile) -->
+            <div id="mobileSidebarDrawer" class="d-md-none" style="position:fixed;top:0;left:0;width:80vw;max-width:320px;height:100vh;z-index:1050;background:#343a40;box-shadow:2px 0 8px rgba(0,0,0,0.15);transform:translateX(-100%);transition:transform 0.3s;overflow-y:auto;">
+                <div class="position-sticky pt-3">
+                    <ul class="nav flex-column p-3">
+                        <li class="nav-item mb-3 text-end">
+                            <button onclick="closeMobileSidebar()" class="btn btn-sm btn-light"><i class="fas fa-times"></i></button>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="<?= site_url('dashboard') ?>"><i class="fas fa-tachometer-alt"></i> <?= lang('App.dashboard') ?></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="<?= site_url('pos') ?>"><i class="fas fa-cash-register"></i> <?= lang('App.pos') ?></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="<?= site_url('products') ?>"><i class="fas fa-box"></i> <?= lang('App.products') ?></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="<?= site_url('inventory') ?>"><i class="fas fa-warehouse"></i> <?= lang('App.inventory') ?></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="<?= site_url('invoices') ?>"><i class="fas fa-file-invoice"></i> <?= lang('App.invoices') ?></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="<?= site_url('purchases') ?>"><i class="fas fa-shopping-cart"></i> <?= lang('App.purchases') ?></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="<?= site_url('settings') ?>"><i class="fas fa-cog"></i> <?= lang('App.settings') ?></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="<?= site_url('transfers') ?>"><i class="fas fa-exchange-alt"></i> <?= lang('App.transfers') ?></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="<?= site_url('reports') ?>"><i class="fas fa-chart-bar"></i> <?= lang('App.reports') ?></a>
+                        </li>
+                        <?php if (session('role') === 'admin'): ?>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="<?= site_url('users') ?>"><i class="fas fa-users"></i> <?= lang('App.users') ?></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="<?= site_url('settings') ?>"><i class="fas fa-cog"></i> <?= lang('App.settings') ?></a>
+                        </li>
+                        <?php endif; ?>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Floating Sidebar Button (mobile only) -->
+            <button id="openSidebarBtn" class="btn btn-primary rounded-circle shadow d-md-none" style="position:fixed;top:18px;left:18px;z-index:2000;width:48px;height:48px;display:flex;align-items:center;justify-content:center;">
+                <i class="fas fa-bars"></i>
+            </button>
                         <li class="nav-item">
                             <a class="nav-link <?= uri_string() === 'dashboard' ? 'active' : '' ?>" href="<?= site_url('dashboard') ?>">
                                 <i class="fas fa-tachometer-alt"></i> <?= lang('App.dashboard') ?>
@@ -117,6 +167,11 @@
                         <li class="nav-item">
                             <a class="nav-link <?= strpos(uri_string(), 'purchases') === 0 ? 'active' : '' ?>" href="<?= site_url('purchases') ?>">
                                 <i class="fas fa-shopping-cart"></i> <?= lang('App.purchases') ?>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <?= strpos(uri_string(), 'settings') === 0 ? 'active' : '' ?>" href="<?= site_url('settings') ?>">
+                                <i class="fas fa-cog"></i> <?= lang('App.settings') ?>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -175,6 +230,43 @@
         </div>
     </footer>
 
+    <script>
+    // Mobile sidebar drawer logic
+    (function() {
+        const openSidebarBtn = document.getElementById('openSidebarBtn');
+        const mobileSidebarDrawer = document.getElementById('mobileSidebarDrawer');
+        let sidebarOpen = false;
+        function openMobileSidebar() {
+            mobileSidebarDrawer.style.transform = 'translateX(0)';
+            mobileSidebarDrawer.style.boxShadow = '2px 0 8px rgba(0,0,0,0.15)';
+            document.body.style.overflow = 'hidden';
+            sidebarOpen = true;
+        }
+        function closeMobileSidebar() {
+            mobileSidebarDrawer.style.transform = 'translateX(-100%)';
+            document.body.style.overflow = '';
+            sidebarOpen = false;
+        }
+        if (openSidebarBtn) {
+            openSidebarBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                openMobileSidebar();
+            });
+        }
+        // Close sidebar on outside click
+        document.addEventListener('click', function(e) {
+            if (sidebarOpen && mobileSidebarDrawer && !mobileSidebarDrawer.contains(e.target) && !openSidebarBtn.contains(e.target)) {
+                closeMobileSidebar();
+            }
+        });
+        // Prevent closing when clicking inside drawer
+        if (mobileSidebarDrawer) {
+            mobileSidebarDrawer.addEventListener('click', function(e) { e.stopPropagation(); });
+        }
+        // Expose closeMobileSidebar globally for close button
+        window.closeMobileSidebar = closeMobileSidebar;
+    })();
+    </script>
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     

@@ -1,7 +1,7 @@
 <?= $this->extend('layouts/main') ?>
 
 <?= $this->section('title') ?>
-<?= lang('App.warehouseInventory') ?? 'Warehouse Inventory' ?>
+<?= lang('warehouseInventory') ?? 'Warehouse Inventory' ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -10,17 +10,17 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="h3 text-gray-800">
             <?php if ($currentWarehouse): ?>
-                <?= esc($currentWarehouse['name']) ?> - <?= lang('App.inventory') ?>
+                <?= esc($currentWarehouse['name']) ?> - <?= lang('inventory') ?>
             <?php else: ?>
-                <?= lang('App.warehouseInventory') ?? 'Warehouse Inventory' ?>
+                <?= lang('warehouseInventory') ?? 'Warehouse Inventory' ?>
             <?php endif; ?>
         </h1>
         <div>
             <a href="<?= site_url('products/create') ?>" class="btn btn-primary me-2">
-                <i class="fas fa-plus-circle me-2"></i> <?= lang('App.addProduct') ?>
+                <i class="fas fa-plus-circle me-2"></i> <?= lang('addProduct') ?>
             </a>
             <a href="<?= site_url('inventory') ?>" class="btn btn-secondary">
-                <i class="fas fa-arrow-left me-2"></i> <?= lang('App.back') ?>
+                <i class="fas fa-arrow-left me-2"></i> <?= lang('back') ?>
             </a>
         </div>
     </div>
@@ -28,7 +28,7 @@
     <!-- Warehouse Selection Card -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary"><?= lang('App.selectWarehouse') ?? 'Select Warehouse' ?></h6>
+            <h6 class="m-0 font-weight-bold text-primary"><?= lang('selectWarehouse') ?? 'Select Warehouse' ?></h6>
         </div>
         <div class="card-body">
             <div class="row">
@@ -51,9 +51,9 @@
                                 }
                             }
                             ?>
-                            <p class="text-muted"><?= $productCount ?> <?= lang('App.products') ?></p>
+                            <p class="text-muted"><?= $productCount ?> <?= lang('products') ?></p>
                             <a href="<?= site_url('inventory/warehouse/' . $warehouse['id']) ?>" class="btn btn-<?= ($currentWarehouse && $currentWarehouse['id'] == $warehouse['id']) ? 'primary' : 'outline-primary' ?> btn-sm">
-                                <?= ($currentWarehouse && $currentWarehouse['id'] == $warehouse['id']) ? lang('App.currentlyViewing') ?? 'Currently Viewing' : lang('App.view') ?>
+                                <?= ($currentWarehouse && $currentWarehouse['id'] == $warehouse['id']) ? lang('currentlyViewing') ?? 'Currently Viewing' : lang('view') ?>
                             </a>
                         </div>
                     </div>
@@ -64,10 +64,10 @@
                     <div class="card h-100 <?= (!$currentWarehouse) ? 'border-primary' : '' ?>">
                         <div class="card-body text-center">
                             <i class="fas fa-boxes fa-3x <?= (!$currentWarehouse) ? 'text-primary' : 'text-secondary' ?> mb-3"></i>
-                            <h5><?= lang('App.allWarehouses') ?? 'All Warehouses' ?></h5>
-                            <p class="text-muted"><?= count($products) ?> <?= lang('App.products') ?></p>
+                            <h5><?= lang('allWarehouses') ?? 'All Warehouses' ?></h5>
+                            <p class="text-muted"><?= count($products) ?> <?= lang('products') ?></p>
                             <a href="<?= site_url('inventory/warehouse') ?>" class="btn btn-<?= (!$currentWarehouse) ? 'primary' : 'outline-primary' ?> btn-sm">
-                                <?= (!$currentWarehouse) ? lang('App.currentlyViewing') ?? 'Currently Viewing' : lang('App.view') ?>
+                                <?= (!$currentWarehouse) ? lang('currentlyViewing') ?? 'Currently Viewing' : lang('view') ?>
                             </a>
                         </div>
                     </div>
@@ -81,31 +81,31 @@
         <div class="card-header py-3 d-flex justify-content-between align-items-center">
             <h6 class="m-0 font-weight-bold text-primary">
                 <?php if ($currentWarehouse): ?>
-                    <?= esc($currentWarehouse['name']) ?> - <?= lang('App.products') ?>
+                    <?= esc($currentWarehouse['name']) ?> - <?= lang('products') ?>
                 <?php else: ?>
-                    <?= lang('App.allProducts') ?? 'All Products' ?>
+                    <?= lang('allProducts') ?? 'All Products' ?>
                 <?php endif; ?>
             </h6>
             <div>
                 <button type="button" class="btn btn-sm btn-success" onclick="exportToExcel()">
-                    <i class="fas fa-file-excel me-1"></i> <?= lang('App.export') ?>
+                    <i class="fas fa-file-excel me-1"></i> <?= lang('export') ?>
                 </button>
             </div>
         </div>
         <div class="card-body">
             <?php if (empty($products)): ?>
                 <div class="alert alert-info">
-                    <i class="fas fa-info-circle me-2"></i> <?= lang('App.noProducts') ?? 'No products found.' ?>
+                    <i class="fas fa-info-circle me-2"></i> <?= lang('noProducts') ?? 'No products found.' ?>
                 </div>
             <?php else: ?>
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover" id="warehouseProductsTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th><?= lang('App.productName') ?></th>
-                                <th><?= lang('App.sku') ?></th>
-                                <th><?= lang('App.category') ?></th>
-                                <th><?= lang('App.price') ?></th>
+                                <th><?= lang('productName') ?></th>
+                                <th><?= lang('sku') ?></th>
+                                <th><?= lang('category') ?></th>
+                                <th><?= lang('price') ?></th>
                                 <th><?= lang('App.stock') ?></th>
                                 <th><?= lang('App.warehouse') ?></th>
                                 <th><?= lang('App.actions') ?? 'Actions' ?></th>

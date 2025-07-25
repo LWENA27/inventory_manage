@@ -22,11 +22,12 @@ class Products extends BaseController
     {
         // Get tenant ID from session (assuming it's stored there)
         $tenantId = session()->get('tenant_id') ?? 1; // Default to 1 for testing
-        
+        $categoryModel = new \App\Models\CategoryModel();
+        $categories = $categoryModel->where('tenant_id', $tenantId)->findAll();
         $data = [
-            'products' => $this->productModel->getByTenant($tenantId)
+            'products' => $this->productModel->getByTenant($tenantId),
+            'categories' => $categories
         ];
-        
         return view('products/index', $data);
     }
     
@@ -37,7 +38,10 @@ class Products extends BaseController
      */
     public function create()
     {
-        return view('products/create');
+        $tenantId = session()->get('tenant_id') ?? 1;
+        $categoryModel = new \App\Models\CategoryModel();
+        $categories = $categoryModel->where('tenant_id', $tenantId)->findAll();
+        return view('products/create', ['categories' => $categories]);
     }
     
     /**
@@ -135,16 +139,17 @@ class Products extends BaseController
     public function edit($id)
     {
         $product = $this->productModel->find($id);
-        
         if (!$product) {
             return redirect()->to('/products')
                 ->with('error', 'Product not found');
         }
-        
+        $tenantId = session()->get('tenant_id') ?? 1;
+        $categoryModel = new \App\Models\CategoryModel();
+        $categories = $categoryModel->where('tenant_id', $tenantId)->findAll();
         $data = [
-            'product' => $product
+            'product' => $product,
+            'categories' => $categories
         ];
-        
         return view('products/edit', $data);
     }
     

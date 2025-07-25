@@ -59,13 +59,9 @@
                             <label for="category" class="form-label"><?= lang('App.category') ?></label>
                             <select class="form-select" id="category" name="category">
                                 <option value=""><?= lang('App.selectCategory') ?? 'Select Category' ?></option>
-                                <?php 
-                                // This would normally be populated from the database
-                                $categories = ['Electronics', 'Clothing', 'Food', 'Medicine', 'Other'];
-                                foreach ($categories as $cat): 
-                                ?>
-                                <option value="<?= $cat ?>" <?= old('category', $product['category']) == $cat ? 'selected' : '' ?>><?= $cat ?></option>
-                                <?php endforeach; ?>
+                                <?php if (!empty($categories)) : foreach ($categories as $cat): ?>
+                                    <option value="<?= esc($cat['name']) ?>" <?= old('category', $product['category']) == $cat['name'] ? 'selected' : '' ?>><?= esc($cat['name']) ?></option>
+                                <?php endforeach; endif; ?>
                             </select>
                         </div>
                         

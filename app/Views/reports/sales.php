@@ -24,16 +24,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>2025-07-24</td>
-                            <td>15</td>
-                            <td>450,000 TZS</td>
-                        </tr>
-                        <tr>
-                            <td>2025-07-23</td>
-                            <td>12</td>
-                            <td>360,000 TZS</td>
-                        </tr>
+                        <?php if (isset($sales) && is_array($sales) && count($sales) > 0): ?>
+                            <?php foreach ($sales as $sale): ?>
+                                <tr>
+                                    <td><?= date('Y-m-d', strtotime($sale['created_at'])) ?></td>
+                                    <td><?= number_format($sale['subtotal'], 0) ?></td>
+                                    <td><?= number_format($sale['total_amount'], 0) ?> TZS</td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <tr><td colspan="3" class="text-center">No sales data found.</td></tr>
+                        <?php endif; ?>
                     </tbody>
                 </table>
             </div>

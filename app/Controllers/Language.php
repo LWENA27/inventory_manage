@@ -23,7 +23,11 @@ class Language extends Controller
         // Set the locale in the session
         session()->set('locale', $locale);
 
-        // Redirect to dashboard to force reload with new language
-        return redirect()->to('dashboard');
+        // Redirect back to previous page to preserve user activity
+        $referer = $this->request->getServer('HTTP_REFERER');
+        if ($referer) {
+            return redirect()->to($referer);
+        }
+        return redirect()->back();
     }
 }
