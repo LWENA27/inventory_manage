@@ -55,7 +55,15 @@ $routes->group('', ['filter' => 'authGuard'], function($routes) {
 
     // Invoices & Purchases
     $routes->GET('invoices', 'Invoices::index');
+    $routes->GET('invoices/create', 'Invoices::create');
+    $routes->POST('invoices', 'Invoices::store');
+    $routes->GET('invoices/(:num)', 'Invoices::show/$1');
+    $routes->GET('invoices/(:num)/edit', 'Invoices::edit/$1');
+    $routes->POST('invoices/(:num)', 'Invoices::update/$1');
+    $routes->GET('invoices/(:num)/delete', 'Invoices::delete/$1');
+    $routes->GET('invoices/(:num)/print', 'Invoices::print/$1');
     $routes->GET('purchases', 'Purchases::index');
+    $routes->GET('purchases/create', 'Purchases::create');
 
     // Transfers
     $routes->GET('transfers', 'Transfers::index');

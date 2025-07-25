@@ -8,21 +8,24 @@ class Settings extends BaseController
     public function index()
     {
         $model = new SettingsModel();
-        $settings = $model->first();
+        $tenantId = session()->get('tenant_id');
+        $settingsKeys = ['system_name', 'logo', 'footer', 'currency', 'tax'];
+        $settings = [];
+        foreach ($settingsKeys as $key) {
+            $settings[$key] = $model->getSetting($key, $tenantId);
+        }
         return view('settings/index', ['settings' => $settings]);
     }
 
     public function update()
     {
         $model = new SettingsModel();
-        $data = [
-            'system_name' => $this->request->getPost('system_name'),
-            'logo' => $this->request->getPost('logo'),
-            'footer' => $this->request->getPost('footer'),
-            'currency' => $this->request->getPost('currency'),
-            'tax' => $this->request->getPost('tax'),
-        ];
-        $model->update(1, $data);
+        $tenantId = session()->get('tenant_id');
+        $settingsKeys = ['system_name', 'logo', 'footer', 'currency', 'tax'];
+        foreach ($settingsKeys as $key) {
+            $value = $this->request->getPost($key);
+            $model->setSetting($key, $value, $tenantId);
+        }
         return redirect()->to('/settings')->with('success', 'Settings updated successfully.');
     }
 }
